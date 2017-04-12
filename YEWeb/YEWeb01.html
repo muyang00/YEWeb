@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="UTF-8" />
+      <title>永恩的技术博客</title>
+  </head>
+  <body>
+    <!-- H系列标签(Header 1~Header 6) -->
+
+    <h1>我是标题1</h1>
+    <h2>我是标题2</h2>
+    <h2>我是标题2</h2>
+    <h3>我是标题3</h3>
+    <h4>我是标题4</h4>
+    <h5>我是标题5</h5>
+    <h6>我是标题6</h6>
+    <!-- P标签(Paragraph) -->
+    <!--  作用:
+- 告诉浏览器哪些文字是一个段落 -->
+
+     <p>我是p包裹的</p>
+     <p>我是p包裹的</p>
+    <!-- 这里的hr标签 通过我的观察发现HR标签可以写/也可以不写/, 如果不写/那么就是按照HTML的规范来编写, 如果写上/那么就是按照XHTML的规范来编写.但是在HTML5中, 由于HTML5兼容HTML和XHTML所有写不写都可以.那么以后我们在做前端开发时到底写还是不写呢? 按照高级开发工具的提示来写即可.
+- 由于hr标签是用来修改样式的, 所以不推荐使用. 今后开发中添加水平线一般都使用CSS盒子来做 -->
+    <hr>
+    <!-- Hr标签(Horizontal Rule)
+- 作用:
+- 在浏览器上显示一条分割线 -->
+    <hr/>
+     <!-- 图片路径分为两种, 一种是绝对路径, 一种是相对路径, 我们重点学习相对路径, 因为在企业级开发中没有人使用绝对路径 -->
+     <!-- 绝对路径
+
+   从电脑的具体盘符开始寻找我们需要的资源
+<img src="F:/lnj/girl.png" />
+以上代码表示在F盘下查找lnj文件夹, 然后在lnj文件夹下查找girl.png图片 -->
+
+<!-- 相对路径
+
+一个文件相对于另外一个文件的位置寻找我们需要的资源
+<img src="girl.png" />
+假设html文件和girl.png都在lnj文件夹下, 以上代码表示在lnj文件夹下查找girl.png图片 -->
+
+<!-- 相对路径几种查找方式
+
+同级
+直接编写, 例如: girl.png
+加上./ 编写, 例如./girl.png
+./代表当前目录, ./girl.png代表在当前目录下查找
+下级
+直接编写, 例如abc/girl.png
+加上./ 编写, 例如./abc/girl.png
+相对当前目录有几个文件夹,就在后面依次补全几个文件夹名称即可, 例如 abc/bbb/ccc/ddd/girl.png或./abc/bbb/ccc/ddd/girl.png
+上级
+../代表访问上级目录
+假设a文件夹下面有b文件夹, 图片存放在a文件夹中, html文件存放在b文件夹中, 那么路径为../girl.png
+因为html文件在b文件夹中, 所以路径是相对于b文件夹的, 所以../代表访问b文件夹的上一级目录, b文件夹的上一级目录是a文件夹, 所以../girl.png就代表在a文件夹查找girl.png
+注意事项:
+相对路径不会出现这种格式aaa/../bbb/girl.png
+虽然可以显示, 但是企业开发中千万不要这么写 -->
+
+     <img src="/Users/apple/Desktop/YEWeb/image0.jpeg" alt="你查看的图片不见了">
+     <img src="image01.jpeg" title="我去旅游" width="270">
+     <img src="./image/image01.jpeg">
+  <!-- br标签(Break) -->
+    <!-- 让内容换行 -->
+<br>
+<br/>
+
+<!-- a标签(anchor) -->
+<!-- 在a标签之间一定要写上文字, 如果没有, 那么在页面上找不到这个标签
+a标签也叫做超级链接或超链接 -->
+
+<a href="https://muyang00.github.io">muyang的博客</a><hr/>
+<a href="https://muyang00.github.io" target="_blank">muyang的博客</a>
+<a href="https://muyang00.github.io" target="_self">muyang的博客</a>
+
+<br/>
+<br/>
+<!-- a标签其它用法
+假链接(本质是跳转到当前页面)
+格式<a href="#">江哥博客</a>
+格式<a href="javascript:">江哥博客</a>
+跳转到当前页面指定位置(锚点链接)
+2.1.格式<a href="#location">跳转到指定位置</a>
+2.2.在页面的指定位置给任意标签添加一个id属性
+例如 <p id="location">这个是目标</p>
+跳转到指定页面的指定位置
+格式: <a href="01-锚点链接.html#location">跳转到指定位置</a>
+只需要在01-锚点链接.html页面添加一个id位置即可 -->
+
+<a href="#location">跳转到指定位置</a>
+
+<p id="location">这个是目标</p>
+
+
+
+
+
+  </body>
+</html>
