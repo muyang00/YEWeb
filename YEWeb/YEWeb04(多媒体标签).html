@@ -138,11 +138,66 @@ del(Deleted)作用: 已删除的文本
 
 <
 @
-
-
 </p>
 
 <p>
+<!-- meta其它类型 -->
+
+<!-- Keywords类型
+
+作用: 告诉搜索引擎当前网页的关键词, 在SEO中非常重要, 能够提高搜索命中率, 让别人更容易找到你
+格式: <meta name="keywords" content="IT前言技术、iOS技术、HTML5技术、Android技术" /> -->
+<meta name="keywords" content="IT前言技术、iOS技术、HTML5技术、Android技术" />
+<!-- Descriiption类型
+
+作用: 告诉搜索引擎当前网页的主要内容, 在SEO中非常重要, 当别人在搜索引擎中搜索到你的网站时会自动作为对你网站的描述信息展示给用户, 能够提高搜索命中率, 让别人更容易找到你
+格式: <meta name="description" content="热爱于IT前言技术、iOS技术、HTML5技术、Android技术研究" /> -->
+<meta name="description" content="热爱于IT前言技术、iOS技术、HTML5技术、Android技术研究" />
+<!-- Author类型
+
+作用: 告诉搜索引擎当前网页的作业, install B专用
+格式: <meta name="author" content="Jonathan_Lee" /> -->
+<meta name="author" content="Jonathan_Lee" />
+
+<!-- Refresh类型
+
+作用: 告诉浏览器多久自动刷新一次页面并指向新页面, 常用于新老域名交替时, 访问老域名自动跳转到新域名, 或用语一些需要定时刷新的聊天室等.
+格式: <meta http-equiv="Refresh" content="2；URL=http://www.baidu.com/"> -->
+
+<meta http-equiv="Refresh" content="2；URL=http://www.baidu.com/">
+
+<!-- Robots类型
+
+作用: 告诉搜索引擎当前网页的作业, 写给网络爬虫看的内容
+格式: <meta name="robots" content="all|none|index|follow|noindex|nofollow" />
+
+index: 告诉搜索引擎允许抓取当前页面
+noindex:告诉搜索引擎不允许抓取当前页面
+follow: 告诉搜索引擎可以从当前页面上找到链接，然后继续访问抓取下去
+nofollow:告诉搜索引擎不允许从当前页面上找到链接, 拒绝其继续访问
+all: 告诉搜索引擎允许抓取当前页面, 并且允许从此页找到链接继续访问
+none: 告诉搜索引擎不允许抓取这个页面,并且不允许从此页找到链接、拒绝其继续访问
+常见组合
+
+<META NAME="ROBOTS" CONTENT="INDEX,FOLLOW">：可以抓取本页，而且可以顺着本页继续索引别的链接
+
+有可以写成<META NAME="ROBOTS" CONTENT="ALL">
+<META NAME="ROBOTS" CONTENT="NOINDEX,FOLLOW">：不许抓取本页，但是可以顺着本页抓取索引别的链接
+
+<META NAME="ROBOTS" CONTENT="INDEX,NOFOLLOW">：可以抓取本页，但是不许顺着本页抓取索引别的链接
+
+<META NAME="ROBOTS" CONTENT="NOINDEX,NOFOLLOW">：不许抓取本页，也不许顺着本页抓取索引别的链接。
+
+注意事项:
+
+不要把两个对立的反义词写到一起，例如
+例如<META NAME="ROBOTS" CONTENT="INDEX,NOINDEX"> -->
+
+<meta name="robots" content="all|none|index|follow|noindex|nofollow" />
+
+
+
+
 
 
 </p>
