@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>永恩的技术博客</title>
+		<style>
+		        .box{
+		            width: 100px;
+		            height: 100px;
+		            background-color: red;
+		            border: 5px solid blue;
+		            /*border: 5px solid;*/
+		            /*border: 5px blue;*/
+		            /*border: solid blue;*/
+		        }
+		</style>
+			<style>
+	        .box2{
+	        	/*按方向连写(分别设置四条边)
+
+				border-top: 边框的宽度 边框的样式 边框的颜色;
+				border-right: 边框的宽度 边框的样式 边框的颜色;*/
+	            width: 100px;
+	            height: 100px;
+	            background-color: red;
+	            border-top:5px solid blue;
+	            border-right:10px dashed green;
+	            border-bottom:15px dotted purple;
+	            border-left:20px double pink;
+	            /*这三个属性的取值是按照顺时针来赋值, 也就是按照上右下左来赋值, 而不是按照*/
+
+	        }
+			</style>
+			<style>
+		        .box3{
+		            width: 200px;
+		            height: 200px;
+		            background-color: red;
+
+		            border-top-width: 5px;
+		            border-top-style: solid;
+		            border-top-color: blue;
+
+		            border-right-width: 10px;
+		            border-right-style: dashed;
+		            border-right-color: green;
+
+		            border-bottom-width: 15px;
+		            border-bottom-style: dotted;
+		            border-bottom-color: purple;
+
+		            border-left-width: 20px;
+		            border-left-style: double;
+		            border-left-color: pink;
+		        }
+			</style>
+		<style>
+		        div{
+		            width: 98px;
+		            height: 90px;
+		            border: 1px solid #000;
+		            background-color: red;
+		        }
+		        .box4{
+		            padding-top: 20px;
+		            padding-right:40px;
+		            padding-bottom:80px;
+		            padding-left:160px;
+		            padding: 20px;
+		       }
+
+		</style>
+		<style>
+		  .box1{
+		            margin-top:20px;
+		            margin-right:40px;
+		            margin-bottom:80px;
+		            margin-left:160px;
+		        }
+		</style>
+		<style>
+        .big{
+            width: 500px;
+            height: 500px;
+            background-color: red;
+            /*不设置边框, big也会被small的顶部外边距顶下去*/
+            border: 5px solid #000;
+           margin:0 auto;
+        }
+        .small{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+       
+        }
+    </style>
+		<div class="box"></div>
+		<hr/>
+		<br/>
+		<div class="box2"></div>
+		<hr/>
+		<br/>
+		<div class="box3"></div>
+		<hr/>
+		<br/>
+		<div class="box4"></div>	
+		<hr/>
+		<br/>
+		<div class="big"></div>	
+		<div class="small"></div>
+
+		<style>
+        .father{
+            width: 800px;
+            height: 500px;
+            background-color: red;
+            /*文字图片会居中*/
+            /*text-align: center;*/
+            /*盒子自身会居中*/
+            margin:0 auto;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+        <style>
+
+        span,a,b,strong{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 6px solid #000;
+            padding: 20px;
+            margin: 20px;
+        }
+
+    </style>
+
+	</head>
+	<body>
+		<!-- 盒模型宽度和高度
+				内容的宽度和高度
+
+				就是通过width/height属性设置的宽度和高度
+				元素的宽度和高度
+
+				宽度 = 左边框 + 左内边距 + width + 右内边距 + 右边框
+				高度 同理可证
+				规律
+				增加了padding/border之后元素的宽高也会发生变化
+				- 如果增加了padding/border之后还想保持元素的宽高, 那么就必须减去内容的宽高
+				元素空间的宽度和高度
+
+				宽度 = 左外边距 + 左边框 + 左内边距 + width + 右内边距 + 右边框 + 右外边距
+				高度 同理可证 -->
+			<div class="father">
+			        我是文字<br/>
+			    <img src="image01.jpeg" alt="">
+			    <div class="son"></div>
+			</div>
+
+			<span>我是span</span>
+				<a href="#">我是超链接</a>
+				<b>我是加粗</b>
+			<strong>我是强调</strong>
+	</body>
+</html>
+
+<hr/>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>外边距合并现象</title>
+  <style>
+      span{
+          display: inline-block;
+          width: 100px;
+          height: 100px;
+          border: 1px solid #000;
+      }
+      div{
+          height: 100px;
+          border: 1px solid #000;
+      }
+      .hezi1{
+          margin-right:50px;
+      }
+      .hezi2{
+          margin-left:100px;
+      }
+      .box1{
+          margin-bottom:50px;
+      }
+      .box2{
+          margin-top:100px;
+      }
+  </style>
+<!-- box-sizing属性
+
+		CSS3中新增了一个box-sizing属性, 这个属性可以保证我们给盒子新增padding和border之后, 盒子元素的宽度和高度不变
+
+		box-sizing取值
+
+		content-box
+		元素的宽高 = 边框 + 内边距 + 内容宽高
+		border-box
+		元素的宽高 = width/height的宽高
+		增加padding和border之后要想保证盒子元素的宽高不变, 系统会自动减去一部分内容的宽度和高度
+ -->
+
+ <!--增加padding/border之后元素宽高会变大-->
+<style>
+.box55{
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    float: right;
+    border: 20px solid #000;
+    padding: 20px;
+}
+</style>
+
+<!--增加padding/border之后元素宽不会变大-->
+<style>
+.box66{
+ box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    float: right;
+    border: 20px solid #000;
+    padding: 20px;
+}
+</style>
+
+</head>
+<body>
+<span class="hezi1">我是span</span><span class="hezi2">我是span</span>
+<div class="box1">我是div</div>
+<div class="box2">我是div</div>
+<div class="box55">我是div</div>
+<div class="box66">我是div</div>
+</body>
+</html>

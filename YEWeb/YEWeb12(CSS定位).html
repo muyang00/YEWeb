@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>永恩的技术博客</title>
+		<!-- 定位
+				相对定位
+				什么是相对定位?
+				对定位就是相对于自己以前在标准流中的位置来移动
+				格式:
+				position: relative; -->
+				<!-- 绝对定位
+				什么是绝对定位?
+				绝对定位就是相对于body或者某个定位流中的祖先元素来定位
+				格式:
+				position: absolute; -->
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+        }
+        .box1{
+            background-color: red;
+        }
+        .box2{
+            background-color: green;
+               position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        .box3{
+            background-color: blue;
+        }
+</style>
+
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box4{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            border: 10px solid #000;
+            padding: 30px;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .box5{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+</style>
+
+					
+	</head>
+	<body>
+				<div class="box1">
+		    	<div class="box2">
+		        <div class="box3"></div>
+		    	</div>
+				</div>
+
+				<div class="box4">
+   				 <div class="box5"></div>
+</div>
+
+	</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>74-固定定位</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            width: auto;
+        }
+        a{
+
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            text-align: center;
+            color: #000;
+
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<p>我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字</p>
+
+<a href="#">^<br>顶部</a>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>71-子绝父相</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            width: 800px;
+            height: 50px;
+            background-color: red;
+            list-style: none;
+            margin: 0px auto;
+            margin-top: 100px;
+        }
+        li{
+            width: 100px;
+            /*height: 50px;*/
+            line-height: 50px;
+            float: left;
+            background-color: gray;
+            text-align: center;
+        }
+        .li03{
+            background-color: darkgray;
+            position: relative;
+        }
+        ul li img{
+            /*
+            缺点以前的位置仍然被占用, 不能让文字居中对齐
+            */
+
+            /*position: relative;
+            left: -35px;
+            top: -15px;*/
+
+            /* 浏览器调整之后位置会发生变化*/
+
+           /* position: absolute;
+            top: 95px;
+            left: 535px;*/
+
+
+            position: absolute;
+            left: 37px;
+            top: -5px;
+
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>服装城</li>
+    <li>美妆馆</li>
+    <li>京东超市</li>
+    <li class="li03">全球购<img src="image02.png" alt="" width="50" ></li>
+    <li>闪购</li>
+    <li>团购</li>
+    <li>拍卖</li>
+    <li>我的哥</li>
+</ul>
+</body>
+</html>

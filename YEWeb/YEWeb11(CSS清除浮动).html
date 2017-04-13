@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>永恩的技术博客</title>
+	/*<!-- 	<style>
+/*盒子高度问题
+
+在标准流中内容的高度可以撑起盒子的高度
+在浮动流中浮动元素内容的高不可以撑起盒子的高*/
+
+        div{
+            background-color: red;
+            height: 100px
+        }
+
+         p{
+            float: left;
+            width: 200px;
+            height: 100px;
+            background-color: blue;
+        }
+.test{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            background-color: red;
+            overflow: hidden;
+}
+</style> -->*/
+
+
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box1{
+            background-color: red;
+        }
+        .box2{
+            background-color: purple;
+            /*margin有效*/
+            margin-top: 20px;
+        }
+        ul{
+            list-style: none;
+        }
+        .ul01 li{
+            background-color: blue;
+        }
+        .ul02 li{
+            background-color: green;
+        }
+        li{
+            float: left;
+        }
+
+          /*这里*/
+        .clearfix:after {
+            /*生成内容作为最后一个元素*/
+            content: "";
+            /*使生成的元素以块级元素显示,占满剩余空间*/
+            display: block;
+            /*避免生成内容破坏原有布局的高度*/
+            height: 0;
+            /*使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互*/
+            visibility: hidden;
+            /*重点是这一句*/
+            clear: both;
+        }
+        .clearfix {
+            /*用于兼容IE, 触发IE hasLayout*/
+            *zoom:1;
+        }
+</style>
+<div class="box1 clearfix">
+    <ul class="ul01">
+        <li>大娃</li>
+        <li>二娃</li>
+        <li>三娃</li>
+    </ul>
+</div>
+<div class="box2">
+    <ul class="ul02">
+        <li>李南江</li>
+        <li>极客江南</li>
+        <li>江哥</li>
+    </ul>
+</div>
+
+
+	</head>
+	<body>
+<div>
+    <p></p>
+</div>
+
+<div class="test">我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字</div>
+
+	</body>
+</html>
