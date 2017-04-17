@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<p>请输出一个 5 到 10 之间的数字:</p>
+
+<input id="demo" type="text">
+<button type="button" onclick="myFunction()">测试输入</button>
+<p id="message"></p>
+
+<script>
+// var patt1=new RegExp("e");
+document.write(/e/.exec("The best things in life are free!"));
+
+
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo").value;
+    try { 
+        if(x == "")  throw "值为空";
+        if(isNaN(x)) throw "不是数字";
+        x = Number(x);
+        if(x < 5)    throw "太小";
+        if(x > 10)   throw "太大";
+    }
+    catch(err) {
+        message.innerHTML = "错误: " + err;
+    }
+}
+ a = 5;
+ b = 60;
+ c = a + b;
+ console.log(c);
+ 
+ var x = 15 * 5;
+debugger;
+document.getElementById("demo").innerHTML = x;
+
+
+/*是否带有小数*/
+function    isDecimal(strValue )  {  
+   var  objRegExp= /^\d+\.\d+$/;
+   return  objRegExp.test(strValue);  
+}  
+
+/*校验是否中文名称组成 */
+function ischina(str) {
+	var reg=/^[\u4E00-\u9FA5]{2,4}$/;   /*定义验证表达式*/
+	return reg.test(str);     /*进行验证*/
+}
+
+/*校验是否全由8位数字组成 */
+function isStudentNo(str) {
+	var reg=/^[0-9]{8}$/;   /*定义验证表达式*/
+	return reg.test(str);     /*进行验证*/
+}
+
+/*校验电话码格式 */
+function isTelCode(str) {
+	var reg= /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
+	return reg.test(str);
+}
+
+/*校验邮件地址是否合法 */
+function IsEmail(str) {
+	var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+	return reg.test(str);
+}
+
+</script>
+
+</body>
+</html>
