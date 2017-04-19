@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>永恩的技术博客</title>
+
+</head>
+<body>
+<p>设置参数的默认值</p>
+<p id="demo"></p>
+
+<p>查找最大的数</p>
+<p id="demo2"></p>
+<p>所有数之和</p>
+<p id="demo3"></p>
+
+<script>
+function myFunction(x, y) {
+    // if(y == undefined) {
+    // 	y = 0;
+    // }
+    y = y || 0;
+    return x * y;
+}
+document.getElementById("demo").innerHTML = myFunction(4);
+
+x = findMax(1, 234, 500, 44, 66, 88);
+function findMax() {
+	var i, max = arguments[0];
+	if (arguments.length < 2) return max;
+	for (i = 0; i < arguments.length; i++){
+		if (arguments[i] > max) {
+			max = arguments[i];
+		}
+	}
+	return max;
+}
+document.getElementById("demo2").innerHTML = x;
+
+function sumAll() {
+	var i, sum = 0;
+	for (var i = 0; i < arguments.length; i++) {
+		 sum += arguments[i]
+	  }
+	  return sum;
+}
+ document.getElementById("demo3").innerHTML = sumAll(99, 78, 300, 234);
+</script>
+
+</body>
+
+</html>
