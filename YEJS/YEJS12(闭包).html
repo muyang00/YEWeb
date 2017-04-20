@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>永恩的技术博客</title>
+</head>
+
+<body>
+<p>局部变量计数</p>	
+<button type="button" onclick="myFunction()">计数!</button>
+<p id="demo"></p>
+<script type="text/javascript">
+var add = (function() {
+  var counter = 0;
+  return function() {return counter += 1;}
+})();
+function myFunction() {
+	document.getElementById("demo").innerHTML = add();
+}
+
+function a() {
+	console.log("执行a函数");
+	setTimeout(function() {
+		console.log("执行a函数的延迟函数");
+	}, 1000)
+};
+function b() {
+	console.log("执行b函数");
+}
+a();
+b();
+
+</script>
+
+</body>
+</html>
