@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+
+<!-- 改变 HTML 内容 -->
+<p id="p1">Hello World!</p>
+<h1 id="header">旧标题</h1>
+
+<!-- 改变 HTML 属性 -->
+<!-- 如需改变 HTML 元素的属性，请使用这个语法：
+document.getElementById(id).attribute=新属性值 -->
+<img id="image" src="smiley.gif" width="160" height="120">
+
+<!-- 改变 HTML 样式 -->
+<!-- 如需改变 HTML 元素的样式，请使用这个语法：
+document.getElementById(id).style.property=新样式 -->
+
+<p id="p2">Hello World!</p>
+<p id="p3">Hello World!</p>
+
+<!-- 使用事件
+HTML DOM 允许我们通过触发事件来执行代码。
+比如以下事件：
+元素被点击。
+页面加载完成。
+输入框被修改。 -->
+
+<h2 id="id1">我的标题 2</h2>
+<button type="button" onclick="document.getElementById('id1').style.color='red'">
+点我!</button>
+
+<p id="p4">这是一个文本。 这是一个文本。 这是一个文本。 这是一个文本。 这是一个文本。 这是一个文本。 这是一个文本。</p>
+<input type="button" value="隐藏文本" onclick="document.getElementById('p4').style.visibility='hidden'" />
+<input type="button" value="显示文本" onclick="document.getElementById('p4').style.visibility='visible'" />
+
+
+
+<script>
+//1.
+document.getElementById("p1").innerHTML="新文本!";
+//1.1
+var element=document.getElementById("header");
+element.innerHTML="新标题";
+//2.
+document.getElementById("image").src="landscape.jpg";
+
+//3.
+document.getElementById("p3").style.color="blue";
+document.getElementById("p3").style.fontFamily="Arial";
+document.getElementById("p3").style.fontSize="larger";
+
+</script>
+
+<p>1.</p>
+<p>以上段落通过脚本修改文本。</p>
+
+<p>"旧标题" 被 "新标题" 取代。</p>
+
+<p>2.</p>
+<p>原图片为 smiley.gif,脚本将图片修改为 landscape.jpg</p>
+
+<p>3.</p>
+<p>以上段落通过脚本修改。</p>
+
+<!-- 1. -->
+<!-- 实例讲解：
+上面的 HTML 文档含有 id="header" 的 <h1> 元素
+
+我们使用 HTML DOM 来获得 id="header" 的元素
+
+JavaScript 更改此元素的内容 (innerHTML) -->
+
+<!-- 2. -->
+<!-- 实例讲解：
+上面的 HTML 文档含有 id="image" 的 <img> 元素
+我们使用 HTML DOM 来获得 id="image" 的元素
+JavaScript 更改此元素的属性（把 "smiley.gif" 改为 "landscape.jpg"） -->
+
+</body>
+</html>
