@@ -30,6 +30,15 @@ HTML 事件的例子：
 <!-- onmouseover 和 onmouseout 事件 -->
 <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#D94A38;width:120px;height:30px;padding:40px">Mouse Over Me</div>
 <h2 onmouseover="style.color='red'"onmouseout="style.color='black'">将鼠标移至文字上</h2>
+
+<!-- addEventListener() 方法 -->
+<!-- 语法
+element.addEventListener(event, function, useCapture); -->
+
+<p>该实例使用addEventListener()方法在按钮添加点击事件</p>
+<button id="myBtn">点我</button>
+<p id="demo"></p>
+
 <script>
 function changetext(id){
 	id.innerHTML="Ooops!";
@@ -44,6 +53,11 @@ function mOver(obj) {
 }
 function mOut(obj) {
 	obj.innerHTML="Mouse Over Me";
+}
+
+document.getElementById("myBtn").addEventListener("click", displayDate);
+function displayDate() {
+	document.getElementById("demo").innerHTML = Date();
 }
 
 </script>
