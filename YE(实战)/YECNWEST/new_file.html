@@ -1,0 +1,2109 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CNWEST新闻</title>
+	<script type="text/javascript" src="lab/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    	/*新闻图片自动浏览*/
+		    var currentIndex = 0;
+            var DEMO; //函数对象
+            var currentID = 0; //取得鼠标下方的对象ID
+            var pictureID = 0; //索引ID
+            $("#frame1 li").eq(0).show(); //默认
+            autoScroll();
+            /*鼠标悬停事件*/
+            $("#frame3 li").hover(function() {
+                StopScrolll();
+                $(".frame3css li").removeClass("current")//所有的li去掉当前的样式加上正常的样式
+                $(this).addClass("current"); //而本身则加上当前的样式去掉正常的样式,$(this)指悬停对象
+                currentID = $(this).attr("id"); //取当前元素的ID_--------重要
+                pictureID = currentID.substring(currentID.length - 1); //取最后一个字符
+                //$("#frame2_1 li").eq(pictureID).fadeIn("slow"); //本身显示
+                //$("#frame2_1 li").not($("#ifocus_piclist li")[pictureID]).hide(); //除了自身别的全部隐藏
+                $("#frame2_1 li").hide();
+                $("#frame2_1 li").eq(pictureID).fadeIn("slow");
+                $("#ifocus_opdiv3 li").hide();
+                $("#ifocus_opdiv3 li").eq(pictureID).show();
+            }, function() {
+                //当鼠标离开对象的时候获得当前的对象的ID以便能在启动自动时与其同步
+                currentID = $(this).attr("id"); //取当前元素的ID
+                pictureID = currentID.substring(currentID.length - 1); //取最后一个字符
+                currentIndex = pictureID;
+                autoScroll();
+            });
+            //自动滚动
+            function autoScroll() {
+                $(".frame3css li:last").removeClass("current");
+                $("#ifocus_opdiv3 li:last").hide();
+                $(".frame3css li").eq(currentIndex).addClass("current");
+                $(".frame3css li").eq(currentIndex - 1).removeClass("current");
+                $("#ifocus_opdiv3 li").eq(currentIndex).show();
+                $("#ifocus_opdiv3 li").eq(currentIndex - 1).hide();
+                $("#frame2_1 li").eq(currentIndex).fadeIn("slow");//淡入效果
+                $("#frame2_1 li").eq(currentIndex - 1).hide();
+                currentIndex++;
+                currentIndex = currentIndex >= 3 ? 0 : currentIndex;
+                DEMO = setTimeout(autoScroll, 2000);
+            }
+            function StopScrolll()//当鼠标移动到对象上面的时候停止自动滚动
+            {
+                clearTimeout(DEMO);
+            }
+        /*广告图片自动浏览*/
+            var DEMO2=0;
+			var currentid2=0;
+			var pictureid2=0;
+			$("#kuaixunimag li").eq(0).show();
+			autoshow();
+			$("#kuaixunbtn li").hover(function(){
+			    stopshow();
+			    $("#kuaixunbtn li").removeClass("currentbtn");
+			    $(this).addClass("currentbtn");
+			    currentid2=$(this).attr("id");//返回当前元素的ID
+			    pictureid2 = currentid2.substring(currentid2.length - 1);
+			    $("#kuaixunimag li").hide();
+			    $("#kuaixunimag li").eq(pictureid2).show();
+			},function(){
+				currentid2=$(this).attr("id");//返回当前元素的ID
+			    pictureid2 = currentid2.substring(currentid2.length - 1);
+			    autoshow();
+			});
+			function autoshow()
+			{
+			    $(".kuaixunbtn li:last").removeClass("currentbtn");
+			    $(".kuaixunbtn li").eq(pictureid2).addClass("currentbtn");
+			    $(".kuaixunbtn li").eq(pictureid2-1).removeClass("currentbtn");
+			    $("#kuaixunimag li").eq(pictureid2).fadeIn("slow");
+			    $("#kuaixunimag li").eq(pictureid2-1).hide();
+			    pictureid2++;
+                pictureid2 = pictureid2 >= 4 ? 0 : pictureid2;
+			    DEMO2=setTimeout(autoshow,2000);
+			}
+			function stopshow()
+			{
+			    clearTimeout(DEMO2);
+			}
+		});
+		function blog_sty()
+		{
+			/************取当前class=weibotu1的div的ID************/
+			var currentid = $("div[class=weibotu1]").attr("id"); 
+            var currentindex = currentid.substring(currentid.length - 1); //取最后一个字符
+
+			if(zzjs_net.checked==true)
+			{
+				$(".weibotu1").eq(currentindex).css('border','#cccccc 1px solid'); 
+			}
+			if(zzjs_net.checked==false)
+			{
+				$(".weibotu1").eq(currentindex).css('border','#99CC66 3px solid'); 
+			}
+		}
+    </script>
+    <style type="text/css">
+    	body{
+    	    text-align:center;
+			background-color:#ffffff;
+			font-size:12px;
+    	}
+    	#container{
+			width:999px;
+			margin:0px auto;
+		}
+    	.topmenucss {
+		    background-image:url("image/topmenu.gif"); 
+		}
+		.topmenucss ul{
+			list-style-type:none;
+			list-style-image:none;
+		}
+		.topmenucss li{
+		    width:40px;
+		    background-image:url("image/topicon.gif");
+		    float:left;
+		}
+		.toptable{
+		    background-image:url("image/topmenu.gif");
+		    width:100%;
+		    height:37px;
+		}
+		.toptable td{
+		    color: gray;
+		    font-family: "宋体";
+		    line-height: 21px;
+		    text-decoration: none;
+		}
+		.toptable td a:link{
+            color: gray;
+		    line-height: 21px;
+		    text-decoration: none;
+		}
+		.logocss {
+		    background-image:url("image/logomenu.gif"); 
+		    width:100%;
+		    height:57px;
+		    margin-top:8px;
+		}
+		.searchbox{
+			margin:14px auto auto auto;
+			border:#CCCCCC 1px solid;
+			background-image:url("image/fangdajing.gif");
+			background-repeat:no-repeat;
+			height:20px;
+			width:200px;
+		}
+		#submit{
+			margin:14px 10px auto auto;
+			border:#CCCCCC 1px solid;
+			height:20px;
+			font-size:16px;
+			font-weight:bold;
+			color:#003366;
+		}
+		#secondtable{
+			background-image:url("image/secondmenu.gif");
+		    width:100%;
+		    height:38px;
+		    margin:7px auto;
+		    font-size:14px
+		}
+		#secondtable td{
+			color:#ffffff;
+			padding-left:5px;
+		}
+		#secondtable td a:link{
+			color:#ffffff;
+			text-decoration: none;
+		}
+		.frame1css{
+			width:999px;
+			height:426px;
+		}
+		.frame2css{
+			width:742px;
+			height:426px;
+			position:relative;
+			float:left;
+			margin:0px;
+			overflow:hidden;
+		}
+		.frame3css{
+			width:250px;
+			height:426px;
+			position:relative;
+			float:right;
+		}
+		.frame2_1css{
+			width:742px;
+			height:100%;
+			position:relative;
+			float:left;
+		}
+		.frame2_1css ul,.frame3css ul{
+			list-style-type:none;
+			list-style-image:none;
+			list-style:none outside none;
+			margin: 0;
+		    padding: 0;
+		}
+		#ifocus_opdiv {
+		    background-color:#000000;
+		    bottom: 0;
+		    height: 90px;
+		    left: 0;
+		    opacity: 0.4;
+		    filter:alpha(opacity=40);
+		    position: absolute;
+		    width: 740px;
+		}
+		#ifocus_opdiv2{
+			background-image:url("image/sanjiao.gif");
+			background-repeat:no-repeat;
+		    bottom: 0;
+		    height: 115px;
+		    top:0;
+		    left: 0;
+		    position: absolute;
+		    width: 116px;
+		}
+		#ifocus_opdiv3{
+			color:#ffffff;
+			text-align:left;
+		    bottom: 0;
+		    height: 90px;
+		    left: 0;
+		    position: absolute;
+		    width: 722px;
+		}
+		#ifocus_opdiv3 ul{
+			list-style-type:none;
+			padding-left:15px;
+		}
+		.ifocus_opdiv3_tex{
+			line-height:18px;
+			color:#aaaaaa;
+		}
+		.frame3css li{
+			padding-bottom:8px;
+			width:239px;
+			height:136px;
+			padding-left:10px;
+		}
+		.contentcss{
+			width:100%;
+			height:auto;
+			margin-top:12px;
+		}
+		.leftcontent{
+			width:651px;
+			height:auto;
+			position:relative;
+			float:left;
+		}
+		.rightcontent{
+			width:330px;
+			height:auto;
+			position:relative;
+			float:right;
+		}
+		.contenttop{
+			width:100%;
+			height:210px;
+			border-bottom:#CCCCCC 1px solid;
+		}
+		.contenttop h1{
+			font-family:"黑体";
+			text-align:left;
+			color:#222222;
+			padding-top:5px;
+			padding-left:1px;
+			font-size:23px;
+		}
+		.contenttop_h1{
+			height:146px;
+			margin-top:12px;
+		}
+		.contenttop_h1_rig{
+			border:#CCCCCC 1px solid;
+			width:216px;
+			height:141px;
+			padding-left:2px;
+			padding-top:4px;
+			position:relative;
+			float:left;
+		}
+		.contenttop_h1_rig a:link{
+			text-decoration: none;
+			color:#000000;
+		}
+		.contenttop_h1_lef a:link{
+			text-decoration: none;
+			color:#777777;
+		}
+		.contenttop_h1_lef{
+			width:375px;
+			position:relative;
+			float:right;
+			font-family:"宋体";
+			font-size:12px;
+			line-height: 23px;
+			padding-right:30px;
+			text-align:left;
+			color:#777777;
+		}
+		.shuoming{
+			padding-top:30px;
+			color:#BBBBBB;
+		}
+		#fenxiang{
+			padding-left:70px;
+			color:#3399CC;
+		}
+		#fenxiang a:link{
+			text-decoration: none;
+		}
+		.bianji{
+			padding-left:70px;
+		}
+		.rigcontentch{
+			background-image:url("image/rightcontent_tit.jpg");
+			background-repeat:no-repeat;
+			width:330px;
+			height:auto;
+			float:left;
+			border:#EEEEEE 1px solid;
+			text-align:left;
+		}
+		.rigcontentch a:link{
+			text-decoration: none;
+			color:#000000;
+			line-height:23px;
+		}
+		.rigcontentch ul{
+			float:left;
+		}
+		.rigcontentch_h1{
+			padding-left:14px;
+			margin-bottom:0px;
+			font-size:14px;
+		}
+		.jinriimag{
+			border:#CCCCCC 1px solid;
+			width:151px;
+			height:96px;
+			padding-left:1px;
+			padding-top:3px;
+			margin-left:14px;
+			position:relative;
+			float:left;
+		}
+		.jinritext{
+			float:right;
+			width:140px;
+			line-height:23px;
+			padding-right:10px;
+		}
+		.jinritext a:link{
+			font-size:14px;
+			font-weight:bold;
+		}
+		.kuaixun ul{
+			list-style-type:none;
+			margin:0px auto;
+		}
+		.kuaixunbtn{
+			padding-left:80px;
+		}
+		.kuaixunbtn ul{
+			margin-bottom:10px;
+		}
+		.kuaixunbtn li{
+			float:left;
+			margin-left:6px;
+		}
+		.yuleimag{
+			border:#CCCCCC 1px solid;
+			width:72px;
+			height:73px;
+			padding-left:1px;
+			padding-top:2px;
+			margin-left:8px;
+			margin-top:15px;
+			position:relative;
+			float:left;
+		}
+		.yuletext{
+			float:right;
+			width:230px;
+			line-height:21px;
+			padding-right:0px;
+		}
+		.junshimag{
+			border:#000000 1px solid;
+			width:90px;
+			height:68px;
+			margin-left:8px;
+			margin-top:15px;
+			position:relative;
+			float:left;
+		}
+		.jushitext{
+			float:right;
+			width:200px;
+			line-height:18px;
+			padding-right:25px;
+		}
+		#junshiul a:link{
+			font-size:14px;
+			margin-top:0px;
+			
+		}
+		.gengduo{
+			height:40px;
+			text-align:right;
+			padding-right:20px;
+			padding-top:32px;
+		}
+		.tit_gengduo{
+			color:#ffffff;
+			font-size:15px;
+			font-weight:bold;
+			padding-top:30px;
+			padding-left:250px;
+			float:left;
+		}
+		.gengduo a:link{
+			text-decoration: none;
+			color:#000000;
+		}
+		.green_title{
+			font-weight:bold;
+			font-size:16px;
+			color:#000000;
+			margin-top:0px;
+		}
+		.green_title a:link{ 
+			color:#444444;
+		}
+		.green_text{
+			font-size:15px;
+			line-height:27px;
+		}
+		.weibo{
+			background-image:url("image/xiaoxinlang.jpg");
+			background-repeat:no-repeat;
+			border:#DDDDDD 1px solid;
+			width:999px;
+			height:187px;
+			float:left;
+			text-align:left;
+			margin-top:10px;
+			margin-bottom:10px;
+			padding-top:5px;
+			color:#3399CC;
+		}
+		.weibo_text a:link{
+			text-decoration: none;
+			color:#0082CB;
+		}
+		.weibo_text{
+			padding-left:2px;
+		}
+		.weibotu1{
+			background-image:url("image/xibuwang.jpg");
+			border:#99CC66 3px solid;
+			/*border:#cccccc 1px solid;*/
+			margin-bottom:3px;
+			width:54px;
+			height:54px;
+			position:relative;
+		}
+		.weibotu2d{
+			 position: absolute;
+			 /*width:12px;
+			 height:12px;
+			 background-image:url("image/duihao2.jpg");*/
+			 right:0px;
+			 bottom:0px;
+		}
+		.weobo_td{
+			padding-left:40px;
+			
+		}
+		.weobo_td td{
+			width:80px;
+			padding-bottom:15px;
+		}
+		.hezuo{
+			width:999px;
+			border:#DDDDDD 1px solid;
+			float:left;
+			text-align:left;
+			margin-top:10px;
+		}
+		.hezuo_title{
+			border-bottom:#DDDDDD 1px solid;
+			height:22px;
+			font-size:13px;
+			font-weight:bold;
+			padding-top:8px;
+			padding-left:25px;
+		}
+		.hezuo_text{
+			width:940px;
+			margin:20px auto 18px 40px;
+			line-height:30px
+		}
+		.hezuo_text a:link{
+			color:#000000;
+			text-decoration:none;
+		}
+		/* 底部文字链接*/
+		.banquan{
+			width:960px;
+			padding-top:10px;
+			margin:10px auto;
+			line-height:180%;
+		}
+		.banquan a:link {
+			color:#000;text-decoration: none;line-height:160%;
+		}
+		.banquan a:visited {
+			color:#000;text-decoration: none;line-height:160%;
+		}
+		.banquan a:hover {
+			color:#000;text-decoration: underline;line-height:160%;
+		}
+		.banquan a:active {
+			color: #000;text-decoration: none;line-height:160%;
+		}
+		.current{
+			background-image:url("image/kuang.gif");
+			background-repeat:no-repeat;
+		}
+		.current img{
+			padding-top:8px;
+			padding-left:2px;
+			width:223px;
+			height:122px;
+		}
+		.currentbtn{
+			background-image:url("image/xuanzhong.jpg");
+			background-repeat:no-repeat;
+		}
+		.currentbtn img{
+			filter:alpha(opacity=0); /*IE滤镜，透明度0%*/
+			opacity:0;/*其他，透明度0%*/
+		}
+		/*微博复选框图片效果*/
+		.weibotu2d a,label {
+			display:block;   /*块*/
+			width:12px;
+			height:12px;
+			overflow:hidden;
+		}
+		.yixuanzhong {
+			background:url("image/duihao2.jpg") no-repeat;
+		}
+		/*.yixuanzhong:hover {
+			background:url("image/huikuang.jpg") no-repeat
+			}*/
+		.weixuanzhong{
+			background:url("image/huikuang.jpg") no-repeat;
+		}
+    </style>
+</head>
+<body id="container">
+	<table id="toptable" class="toptable" align="center">
+		<tr>
+			<td>
+				<table align="center">
+					<tr>
+						<td><a target="_blank" href="../">首页</a></td>
+						<td align="center">|</td>		
+						<td><a target="_blank" href="../">新闻</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">读书</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">评论</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">娱乐</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">体育</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">军事</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">图片</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">访谈</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">商城</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">汽车</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">文化</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">教育</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">旅游</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">美食</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">时尚</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">健康</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">商旅</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">论坛</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">博客</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">房产</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">陕视网</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">宽频</a></td>
+						<td align="center">|</td>
+						<td><a target="_blank" href="../">民生热线</a></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<div id="logotable" class="logocss">
+		<table id="searchtable" align="right">
+			<tr>
+				<td><input type="text" id="search" class="searchbox"></td>
+				<td><input type="submit" id="submit" style="border:0px;background-color:#EEEEEE;" onclick="" value="搜"/></td>
+			</tr>
+		</table>	
+	</div>
+	<table id="secondtable">
+		<tr>
+			<td>
+				<table id="searchtable" align="center">
+					<tr>
+						<td><a target="_blank" href="../">陕西</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">国内</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">国际</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">社会</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">本网原创</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">体育</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">娱乐</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">军事</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">民生热线</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">华山论剑</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">图片</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">滚动</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">语录</a></td>
+						<td>|</td>
+						<td><a target="_blank" href="../">专题</a></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<div id="frame1" class="frame1css">
+		<div id="frame2" class="frame2css">
+			<div id="frame2_1" class="frame2_1css">
+				<ul>
+					<li>
+						<a href="../" target="_blank">
+							<img src="image/1.gif" border="0" style="width:742px;height:426px;">
+						</a>
+					</li>
+					<li style="display:none">
+						<a href="../" target="_blank">
+							<img src="image/2.gif" border="0" style="width:742px;height:426px;">
+						</a>
+					</li>
+					<li style="display:none">
+						<a href="../" target="_blank">
+							<img src="image/3.gif" border="0" style="width:742px;height:426px;">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div id="ifocus_opdiv">
+			</div>
+			<div id="ifocus_opdiv2">
+			</div>
+			<div id="ifocus_opdiv3">
+				<ul>
+					<li>
+						<h2>高清组图:热热闹闹重阳节 幸福乡村爱老情</h2>
+						<p class="ifocus_opdiv3_tex">西安市长安区贾里村的乡亲们齐聚中心广场，通过歌曲、舞蹈、锣鼓、书画展等多彩的活动欢度重阳节。表演节目、书画作品大部分都是老人原创，内容页多取材于日常生活，充满了浓郁的社区气息。</p>
+					</li>
+					<li>
+						<h2>高清组图:绿色大树</h2>
+						<p>西安市长安区贾里村的乡亲们齐聚中心广场，通过歌曲、舞蹈、锣鼓、书画展等多彩的活动欢度重阳节。表演节目、书画作品大部分都是老人原创，内容页多取材于日常生活，充满了浓郁的社区气息。</p>
+					</li>
+					<li>
+					    <h2>高清组图:美丽女孩</h2>
+						<p>西安市长安区贾里村的乡亲们齐聚中心广场，通过歌曲、舞蹈、锣鼓、书画展等多彩的活动欢度重阳节。表演节目、书画作品大部分都是老人原创，内容页多取材于日常生活，充满了浓郁的社区气息。</p>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="frame3" class="frame3css">
+			<ul>
+				<li id="p0">
+					<img src="image/1.gif" border="0">
+				</li>
+				<li id="p1">
+					<img src="image/2.gif" border="0">
+				</li>
+				<li id="p2">
+					<img src="image/3.gif" border="0">
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="content" class="contentcss">
+		<div class="leftcontent">
+			<div class="contenttop" style="background-color:#EEEEEE;">
+				<h1 style="margin-top:1px;">陇上行：张艺谋一部《三枪拍案》炒火了张掖丹霞</h1>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<img src="image/danxia.jpg" border="0">
+					</div>
+					<div class="contenttop_h1_lef">
+						<p>东西好不如卖得好。张掖丹霞国家地质公园的风景奇幻瑰丽，但在陕西导演张艺谋的贺岁大片《三枪拍案惊奇》之前，这里一天的游客顶多几百人，而今年黄金周，这里每天接待游客上万人。
+							<a href="../" target="_blank">
+								<img style="position:relative;float:right;padding-right:63px;" src="image/xiangxi.jpg" border="0">
+							</a>
+						</p>
+						<p class="shuoming">
+							<span>10月28日 10:10更新</span>
+							<span id="fenxiang">
+								<img src="image/jiahao.jpg"> 分享到：
+								<a href="../" target="_blank">
+									<img src="image/QQ.jpg" border="0" style="">
+								</a>
+								<a href="../" target="_blank">
+									<img src="image/sina.jpg" border="0" style="">
+								</a>
+								<a href="../" target="_blank">
+									<img src="image/weibo.jpg" border="0" style="">
+								</a>
+								<a href="../" target="_blank">
+									<img src="image/renren.jpg" border="0" style="">
+								</a>
+								<a href="../" target="_blank">
+									<img src="image/xiaohongren.jpg" border="0" style="">
+								</a>
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="contenttop">
+				<h1>南海舰队举行应急防控抗导演练</h1>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<img src="image/yanlian.jpg" border="0">
+					</div>
+					<div class="contenttop_h1_lef">
+						<p>近日，南海舰队某驱逐舰支队舰艇离港即拉响战斗警报，进行了为期数天的海上应急情况处置能力演练，16个科目在演练中得到全面检验。该驱逐舰支队及时研判海区态势，
+							<a href="../" target="_blank">
+								<img style="position:relative;float:right;padding-right:156px;" src="image/xiangxi.jpg" border="0">
+							</a>
+						</p>
+						<p class="shuoming">
+							<span>10月28日 10:10更新</span>
+							<span class="bianji">编辑:XXXXXX</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="contenttop">
+				<h1>第三届世界 麻将锦标赛在重庆黔江开赛</h1>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<img src="image/majiang.jpg" border="0">
+					</div>
+					<div class="contenttop_h1_lef">
+						<p>10月28日，重庆黔江国际旅游界第三届世界麻将锦标赛开幕。来自奥地利、巴西、丹麦、德国、意大利、日本、荷兰、俄罗斯、新加坡、西班牙、瑞典和中国的选手参加了此次锦标赛。
+							<a href="../" target="_blank">
+								<img style="position:relative;float:right;padding-right:98px;" src="image/xiangxi.jpg" border="0">
+							</a>
+						</p>
+						<p class="shuoming">
+							<span>10月28日 10:10更新</span>
+							<span class="bianji">编辑:XXXXXX</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="contenttop">
+				<h1>菲媒称中国将在渚碧礁建飞机跑道 紧邻中业岛</h1>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<img src="image/zhongyedao.jpg" border="0">
+					</div>
+					<div class="contenttop_h1_lef">
+						<p>10月28日，重庆黔江国际旅游界第三届世界麻将锦标赛开幕。来自奥地利、巴西、丹麦、德国、意大利、日本、荷兰、俄罗斯、新加坡、西班牙、瑞典和中国的选手参加了此次锦标赛。
+							<a href="../" target="_blank">
+								<img style="position:relative;float:right;padding-right:98px;" src="image/xiangxi.jpg" border="0">
+							</a>
+						</p>
+						<p class="shuoming">
+							<span>10月28日 10:10更新</span>
+							<span class="bianji">编辑:XXXXXX</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="contenttop">
+				<h1>“众猫秀萌态”：实拍第二届世界名猫展</h1>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<img src="image/mao.jpg" border="0">
+					</div>
+					<div class="contenttop_h1_lef">
+						<p>10月27日在武汉第二届名猫展上拍摄的宠物猫，第二届世界名猫展在湖北省武汉市举行，多个品牌的猫咪展示各自的萌态，吸引众多爱猫人士前来参观。
+							<a href="../" target="_blank">
+								<img style="position:relative;float:right;padding-right:266px;" src="image/xiangxi.jpg" border="0">
+							</a>
+						</p>
+						<p class="shuoming">
+							<span>10月28日 10:10更新</span>
+							<span class="bianji">编辑:XXXXXX</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div style="background-image:url('image/gre_title.jpg');background-repeat:no-repeat;">
+				<div class="tit_gengduo">国内新闻</div>
+				<div class="gengduo">
+					<span><a href="../" target="_blank">更多>></a>
+					</span>
+				</div>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/baoyu.jpg" border="0">海南三亚迎来强风暴雪
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">胡锦涛等领导人参观“科学发展成就辉煌”图片展</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:72px;">
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/lingcai.jpg" border="0">西安6千市民排长龙免费领菜
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">业内人士爆大学排行榜内幕：有高校花钱买名次</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:72px;">
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/maozhan.jpg" border="0">众猫秀萌态 第二届世界名猫展
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">四川松藩回应拥有16名副县长 称均在政策规定内</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="background-image:url('image/gre_title.jpg');background-repeat:no-repeat;margin-top:32px;">
+				<div class="tit_gengduo" style="padding-top:18px;">社会民生</div>
+				<div class="gengduo">
+					<a href="../" target="_blank">更多>></a>
+				</div>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/maiyu.jpg" border="0">乐观母亲带3岁脑瘫儿卖鱼
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">胡锦涛等领导人参观“科学发展成就辉煌”图片展</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:72px;">
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/laoren.jpg" border="0">关爱老人精神健康新招迭出
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">业内人士爆大学排行榜内幕：有高校花钱买名次</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:72px;">
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/qiang.jpg" border="0">桂林破获仿真枪抢劫案件
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">四川松藩回应拥有16名副县长 称均在政策规定内</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>	
+			<div style="background-image:url('image/gre_title.jpg');background-repeat:no-repeat;margin-top:32px;">
+				<div class="tit_gengduo" style="padding-top:18px;">国际新闻</div>
+				<div class="gengduo">
+					<a href="../" target="_blank">更多>></a>
+				</div>
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/haixiao.jpg" border="0">7.7级地震引发夏威夷海啸
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">胡锦涛等领导人参观“科学发展成就辉煌”图片展</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:72px;">
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/yanxi.jpg" border="0">野田被迫取消日美夺岛演习
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">业内人士爆大学排行榜内幕：有高校花钱买名次</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top:72px;">
+				<div class="contenttop_h1">
+					<div class="contenttop_h1_rig">
+						<a href="../" target="_blank">
+							<img style="padding-bottom:15px" src="image/qianting.jpg" border="0">俄罗斯退役核潜艇集体维修
+						</a>
+					</div>
+					<div class="contenttop_h1_lef">
+						<p class="green_title">
+							<a href="../" target="_blank">四川松藩回应拥有16名副县长 称均在政策规定内</a>
+						</p>
+						<ul class="green_text"  style="padding-left:20px;">
+							<li>
+								<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+								<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">兰帕德入人和只差签字</a>
+								<a href="../" target="_blank">C罗获最性感男运动员</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+								<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+								<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="rightcontent">
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">今日焦点</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<div>
+					<div class="jinriimag">
+						<a href="../" target="_blank">
+							<img src="image/baozha.jpg" border="0">
+						</a>
+					</div>
+					<div class="jinritext">
+						<a href="../" target="_blank">陕西兴平一小区采暖锅炉房爆炸，6人死亡1人受伤</a>
+					</div>
+				</div>
+				<ul>
+					<li>
+						<a href="../" target="_blank">关注西部网官方微博 随处分享最新资讯</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">略阳一铜矿发生意外事故 五名施工工人井巷遇难</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">港商品鉴陕西特色农副产品："都要打上陕西标签"</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">陕西兴平一小区采暖锅炉房爆炸 6人死亡1人受伤</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">白酒普遍存在塑化剂 西安白酒销售市场暂未受影响</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">兰乔国际城暖气为何还没来？答复：明年元旦供暖</a>
+					</li>
+				</ul>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">即时快讯</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<ul>
+					<li>
+						<a href="../" target="_blank">冷空气袭陕西明日大部分地区有雨雪 气温将降6左右</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">略阳一铜矿发生意外事故 五名施工工人井巷遇难</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">港商品鉴陕西特色农副产品："都要打上陕西标签"</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">陕西兴平一小区采暖锅炉房爆炸 6人死亡1人受伤</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">白酒普遍存在塑化剂 西安白酒销售市场暂未受影响</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">兰乔国际城暖气为何还没来？答复：明年元旦供暖</a>
+					</li>
+				</ul>
+				<div class="kuaixun">
+					<div id="kuaixunimag">
+						<ul>
+							<li>
+								<a href="../" target="_blank">
+									<img src="image/baoji1.jpg" border="0">
+								</a>
+							</li>
+							<li style="display:none">
+								<a href="../" target="_blank">
+									<img src="image/baoji2.jpg" border="0">
+								</a>
+							</li>
+							<li style="display:none">
+								<a href="../" target="_blank">
+									<img src="image/baoji3.jpg" border="0">
+								</a>
+							</li>
+							<li style="display:none">
+								<a href="../" target="_blank">
+									<img src="image/baoji4.jpg" border="0">
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div id="kuaixunbtn" class="kuaixunbtn">
+						<ul>
+							<li id="img0"><img src="image/noxuanzhong.jpg" border="0"></li>
+							<li id="img1"><img src="image/noxuanzhong.jpg" border="0"></li>
+							<li id="img2"><img src="image/noxuanzhong.jpg" border="0"></li>
+							<li id="img3"><img src="image/noxuanzhong.jpg" border="0"></li>
+						</ul>
+					</div>
+					
+				</div>
+
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">华山论见</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<h3 class="rigcontentch_h1">
+					<a style="padding-left:30px;" class="" href="../" target="_blank">当“中国式过马路”遭遇“中国式处罚”</a>
+				</h3>
+				<ul style="list-style-type:none;">
+					<li>
+						<a href="../" target="_blank"><font color="red">[房地产成本]</font>该从“房地产限利令”里读出什么？</a>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="red">[90后教师虐童案]</font>虐童事件频发不仅仅是师德的问题</a>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="red">[年轻人生病“硬抗”]</font>能好好看病，谁愿意扛着？</a>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="red">[女仆装授课]</font>女仆装之后师生们应该穿什么上课</a>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="red">[精神病自愿住院治疗]</font>都精神病了，还怎么自愿？</a>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="red">[杀猴剥皮]</font>“虐猴男”将“如人性的积蓄”挥霍一空</a>
+					</li>
+				</ul>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">语录</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<ul style="list-style-type:none;line-height:21px;">
+					<li>
+						<a href="../" target="_blank"><font color="#990000" style="font-weight:bold;">“"走红"要感谢孙悟空的猴子猴孙”</font></a>
+					</li>
+					<li>
+						<font color="#000000">——延参法师重庆签售</font>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="#990000" style="font-weight:bold;">“娶个中国老婆等于娶了一家人”</font></a>
+					</li>
+					<li>
+						<font color="#000000">——老外吐槽娶中国老婆的下场�</font>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="#990000" style="font-weight:bold;">“-听说去学校就害怕”</font></a>
+					</li>
+					<li>
+						<font color="#000000">——浙江虐童事件受害者</font>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="#990000" style="font-weight:bold;">“警察同志，你要保护我!”</font></a>
+					</li>
+					<li>
+						<font color="#000000">——民工腿绑巨款坐火车回乡</font>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="#990000" style="font-weight:bold;">“老师好凶，经常骂人”</font></a>
+					</li><li>
+						<font color="#000000">——女童上课讲话被老师罚站摔倒致骨折</font>
+					</li>
+					<li>
+						<a href="../" target="_blank"><font color="#990000" style="font-weight:bold;">“这么小就这么懂事，觉得很心疼”</font></a>
+					</li>
+					<li>
+						<font color="#000000">——4岁“最小校园清洁工”感动网友</font>
+					</li>
+				</ul>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">娱乐</a>
+					<span style="float:right;padding-right:20px;">
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">焦点|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">明星|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">音乐|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">电影|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">秀场</font></a>
+					</span>
+				</h3>
+				<div>
+					<div class="yuleimag">
+						<a href="../" target="_blank">
+							<img src="image/guojingjing.jpg" border="0">
+						</a><font color="gray" style="font-size:12px;font-weight:normal;padding-left:5px;">郭晶晶大婚</font>
+					</div>
+					<div class="yuletext">
+						<ul style="padding-left:2px;">
+							<li>
+								<a href="../" target="_blank">《白鹿原》入围金马奖4项 获奖颇受期待</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">31元大衣要买50万 大衣哥：节目组安排</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">姚晨曹郁新西兰大喜 曝光百张亲密照</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">“寒战”5天过亿 香港人为什么爱拍警匪片</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<ul>
+					<li>
+						<a href="../" target="_blank">关注西部网官方微博 随处分享最新资讯</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">略阳一铜矿发生意外事故 五名施工工人井巷遇难</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">港商品鉴陕西特色农副产品："都要打上陕西标签"</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">陕西兴平一小区采暖锅炉房爆炸 6人死亡1人受伤</a>
+					</li>
+				</ul>
+				<div>
+					<a href="../" target="_blank">
+						<img src="image/mingrentang.jpg" style="padding-left:7px" border="0">
+					</a>
+				</div>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">星级秀场</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<div>
+					<a href="../" target="_blank">
+						<img src="image/xiuchang1.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/xiuchang2.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/xiuchang3.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/xiuchang4.jpg" style="padding-left:7px" border="0">
+					</a>
+				</div>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">体育</a>
+					<span style="float:right;padding-right:20px;">
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">三秦竞技|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">欧洲足球|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">中超|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">NBA|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">CBA</font></a>
+					</span>
+				</h3>
+				<div>
+					<div class="yuleimag">
+						<a href="../" target="_blank">
+							<img src="image/maiti.jpg" border="0">
+						</a><font color="gray" style="font-size:12px;font-weight:normal;padding-left:0px;">熊柯助阵麦迪</font>
+					</div>
+					<div class="yuletext">
+						<ul style="padding-left:2px;">
+							<li>
+								<a href="../" target="_blank">《白鹿原》入围金马奖4项 获奖颇受期待</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">31元大衣要买50万 大衣哥：节目组安排</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">姚晨曹郁新西兰大喜 曝光百张亲密照</a>
+							</li>
+							<li>
+								<a href="../" target="_blank">“寒战”5天过亿 香港人为什么爱拍警匪片</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<ul style="padding-left:25px;">
+					<li>
+						<a href="../" target="_blank">篮坛</a>|
+						<a href="../" target="_blank">篮球宝贝熊柯助阵麦蒂</a>
+						<a href="../" target="_blank">德安东尼拄拐指导科比</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">足坛</a>|
+						<a href="../" target="_blank">兰帕德入人和只差签字</a>
+						<a href="../" target="_blank">C罗获最性感男运动员</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">花边</a>|
+						<a href="../" target="_blank">乐观独腿飞人于篮球为伴</a>
+						<a href="../" target="_blank">揭秘王健林奢华游艇</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">综合</a>|
+						<a href="../" target="_blank">摩托车手上演“生死腾空”</a>
+						<a href="../" target="_blank">马青骅拍摄帅气写真</a>
+					</li>
+				</ul>
+				<div>
+					<a href="../" target="_blank">
+						<img src="image/tiyuju.jpg" style="padding-left:7px" border="0">
+					</a>
+				</div>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">体育酷图</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<div>
+					<a href="../" target="_blank">
+						<img src="image/tiyu1.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/tiyu2.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/tiyu3.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/tiyu4.jpg" style="padding-left:7px" border="0">
+					</a>
+				</div>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">军事</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">陕西国防|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">军情观察|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">武器大全|</font></a>
+						<a class="" href="../" target="_blank"><font style="font-size:13px;font-weight:normal;">军事档案</font></a>
+					</span>
+				</h3>
+				<div>
+					<div class="junshimag">
+						<a href="../" target="_blank">
+							<img src="image/junshi1.jpg" border="0">
+						</a>
+					</div>
+					<div class="jushitext">
+						<div style="margin-top:13px;font-weight:bold;font-size:13px">F-117A折戟科索沃</div>
+						<p style="text-indent:2em;color:gray;margin-top:3px">1999年3月24日晚8时，以美国为首的北约对南联盟发起了代号“联盟力量”的大规模空中打击。
+							<a href="../" target="_blank">[详细]</a>
+						</p>
+					</div>
+					<div class="junshimag" style="margin-top:21px">
+						<a href="../" target="_blank">
+							<img src="image/junshi2.jpg" border="0">
+						</a>
+					</div>
+					<div class="jushitext">
+						<div style="font-weight:bold;font-size:13px">日德兰海战</div>
+						<p style="text-indent:2em;color:gray;margin-top:3px">日德兰海战是第一次世界大战期间，德国为突破英国的海上封锁，在日德兰半岛......
+							<a href="../" target="_blank">[详细]</a>
+						</p>
+					</div>
+				</div>
+				<ul id="junshiul" style="padding-left:20px;">
+					<li>
+						<a href="../" target="_blank">关注西部网官方微博 随处分享最新资讯</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">略阳一铜矿发生意外事故 五名施工工人井巷遇难</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">港商品鉴陕西特色农副产品："都要打上陕西标签"</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">陕西兴平一小区采暖锅炉房爆炸 6人死亡1人受伤</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">港商品鉴陕西特色农副产品："都要打上陕西标签"</a>
+					</li>
+					<li>
+						<a href="../" target="_blank">陕西兴平一小区采暖锅炉房爆炸 6人死亡1人受伤</a>
+					</li>
+				</ul>
+			</div>
+			<div class="rigcontentch">
+				<h3 class="rigcontentch_h1">
+					<a class="" href="../" target="_blank">武器大全</a>
+					<span style="float:right;padding-right:10px;">
+						<a class="" href="../" target="_blank">
+								<img src="image/more.jpg" border="0">
+						</a>
+					</span>
+				</h3>
+				<div>
+					<a href="../" target="_blank">
+						<img src="image/wuqi1.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/wuqi2.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/wuqi3.jpg" style="padding-left:7px" border="0">
+					</a>
+					<a href="../" target="_blank">
+						<img src="image/wuqi4.jpg" style="padding-left:7px" border="0">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--微博推荐-->
+	<div class="weibo">
+		<p style="padding-left:40px;">微博推荐</p>
+		<div class="weobo_td">
+			<table>
+				<tr>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog0">
+								<div class="weibotu2d">
+									<label for="zzjs_net">
+										<a href="#weixuanzhong" _fcksavedurl="#weixuanzhong" name="yixuanzhong" class="yixuanzhong" onclick="zzjs_net.checked=true;blog_sty();"></a>
+										<a href="#yixuanzhong" _fcksavedurl="#yixuanzhong" name="weixuanzhong" class="weixuanzhong" onclick="zzjs_net.checked=false;blog_sty();"></a>
+										<input type="checkbox" id="zzjs_net">
+									</label>
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog1">
+								<div class="weibotu2d">
+									<label for="zzjs_net">
+										<a href="#weixuanzhong" _fcksavedurl="#weixuanzhong" name="yixuanzhong" class="yixuanzhong" onclick="zzjs_net.checked=true;blog_sty();"></a>
+										<a href="#yixuanzhong" _fcksavedurl="#yixuanzhong" name="weixuanzhong" class="weixuanzhong" onclick="zzjs_net.checked=false;blog_sty();"></a>
+										<input type="checkbox" id="zzjs_net">
+									</label>
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog2">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog3">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog4">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog5">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog6">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog7">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog8">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog9">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog10">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div align="center">
+			<a href="../" target="_blank">
+				<img src="image/yijian.jpg" border="0">
+			</a>
+		</div>
+	</div>
+	<!--陕西微博-->
+	<div class="weibo" style="height:240px;">
+		<p style="padding-left:40px;">陕西微博</p>
+		<div class="weobo_td">
+			<table>
+				<tr>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog11">
+								<div class="weibotu2d">
+									<!--<input type="checkbox" checked="checked">-->
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog12">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog13">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog14">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog15">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog16">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog17">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog18">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog19">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog20">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog21">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog22">
+								<div class="weibotu2d">
+									<!--<input type="checkbox" checked="checked">-->
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog23">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog24">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog25">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog26">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog27">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog28">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog29">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog30">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog31">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+					<td>
+						<div>
+							<div class="weibotu1" id="blog32">
+								<div class="weibotu2d">
+								</div>
+							</div>
+							<div class="weibo_text">
+								<a href="../" target="_blank">西部网</a>
+								<img src="image/duihao.jpg" style="padding-bottom:3px;">
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--合作连接-->
+	<div class="hezuo">
+		<div class="hezuo_title">合作链接
+			<img src="image/lianjie.jpg" border="0px">
+		</div>
+		<div class="hezuo_text">
+			<a href=../>新华网</a>
+			<a href=../>人民网</a>
+			<a href=../>中新网</a>
+			<a href=../>国际在线</a>
+			<a href=../>中国网</a>
+			<a href=../>中国日报</a>
+			<a href=../>中国经济网</a>
+			<a href=../>中广网</a>
+			<a href=../>光明网</a>
+			<a href=../>搜狐</a>
+			<a href=../>TOM网</a>
+			<a href=../>奥一网</a>
+			<a href=../>商都网</a>
+			<a href=../>星辰在线</a>
+			<a href=../>中国西部网</a>
+			<a href=../>长城网</a>
+			<a href=../>CCTV.com《城市频道》</a>
+			<a href=../>中国党建网</a>
+			<a href=../>昆明信息港</a>
+			<a href=../>和谐陕西网</a>
+			<a href=../>乌鲁木齐在线</a>
+			<a href=../>快乐福彩网</a>
+			<a href=../>文明公民网</a>		
+		</div>
+	</div>
+	<!--版权-->
+	<div style="width:999px;float:left">
+		<div class="banquan">
+			<a target=_blank href="http://www.cnwest.com/about/aboutus.htm">网站简介</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/about/copyrights.htm">版权声明</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/about/contact.htm">联系我们</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/about/tougao.htm">西部网投稿</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/about/links.htm">友情链接</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/ads">广告服务</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://exmail.qq.com/login">工作邮箱</a></a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/about/fankui.htm">意见反馈</a>&nbsp;|&nbsp;
+			<a target=_blank href="http://www.cnwest.com/jubao">不良信息举报</a><br>
+			Copyright<span style="font-size:12px;font-family:Arial;padding-right:2px;padding-left:2px;">&copy;</span>2006-2011 西部网（陕西新闻网） <a href="../"><font color="#000000">WWW.<font color="#CA0000">CNWEST</font>.COM</font></a>. All rights reserved.<br>
+			联系电话：029-87965269&nbsp;&nbsp;85257538 商务：029-85226012<br>
+			本网站法律顾问：<a href="http://www.hzlvshi.com/" target="_blank">陕西洪振律师事务所主任 王洪</a><br>
+			<a href="http://www.miibeian.gov.cn/" target="_blank">陕ICP备07012147号</a>&nbsp;&nbsp;&nbsp;<a href="../content/2008-09/25/content_1442866.htm" target="_blank">互联网新闻信息服务许可证：国新网 6112006001</a>&nbsp;&nbsp;&nbsp;信息网络传播视听节目许可证：2706142
+		</div>
+	</div>
+</body>
+</html>
+
