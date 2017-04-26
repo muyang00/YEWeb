@@ -3,7 +3,105 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>西部网</title>
-		
+		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	 <script type="text/javascript">
+    	$(document).ready(function() {
+    	/*新闻图片自动浏览*/
+		    var currentIndex = 0;
+            var DEMO; //函数对象
+            var currentID = 0; //取得鼠标下方的对象ID
+            var pictureID = 0; //索引ID
+            $("#frame1 li").eq(0).show(); //默认
+            autoScroll();
+            /*鼠标悬停事件*/
+            $("#frame3 li").hover(function() {
+                StopScrolll();
+                $(".frame3css li").removeClass("current")//所有的li去掉当前的样式加上正常的样式
+                $(this).addClass("current"); //而本身则加上当前的样式去掉正常的样式,$(this)指悬停对象
+                currentID = $(this).attr("id"); //取当前元素的ID_--------重要
+                pictureID = currentID.substring(currentID.length - 1); //取最后一个字符
+                //$("#frame2_1 li").eq(pictureID).fadeIn("slow"); //本身显示
+                //$("#frame2_1 li").not($("#ifocus_piclist li")[pictureID]).hide(); //除了自身别的全部隐藏
+                $("#frame2_1 li").hide();
+                $("#frame2_1 li").eq(pictureID).fadeIn("slow");
+                $("#ifocus_opdiv3 li").hide();
+                $("#ifocus_opdiv3 li").eq(pictureID).show();
+            }, function() {
+                //当鼠标离开对象的时候获得当前的对象的ID以便能在启动自动时与其同步
+                currentID = $(this).attr("id"); //取当前元素的ID
+                pictureID = currentID.substring(currentID.length - 1); //取最后一个字符
+                currentIndex = pictureID;
+                autoScroll();
+            });
+            //自动滚动
+            function autoScroll() {
+                $(".frame3css li:last").removeClass("current");
+                $("#ifocus_opdiv3 li:last").hide();
+                $(".frame3css li").eq(currentIndex).addClass("current");
+                $(".frame3css li").eq(currentIndex - 1).removeClass("current");
+                $("#ifocus_opdiv3 li").eq(currentIndex).show();
+                $("#ifocus_opdiv3 li").eq(currentIndex - 1).hide();
+                $("#frame2_1 li").eq(currentIndex).fadeIn("slow");//淡入效果
+                $("#frame2_1 li").eq(currentIndex - 1).hide();
+                currentIndex++;
+                currentIndex = currentIndex >= 3 ? 0 : currentIndex;
+                DEMO = setTimeout(autoScroll, 2000);
+            }
+            function StopScrolll()//当鼠标移动到对象上面的时候停止自动滚动
+            {
+                clearTimeout(DEMO);
+            }
+        /*广告图片自动浏览*/
+            var DEMO2=0;
+			var currentid2=0;
+			var pictureid2=0;
+			$("#kuaixunimag li").eq(0).show();
+			autoshow();
+			$("#kuaixunbtn li").hover(function(){
+			    stopshow();
+			    $("#kuaixunbtn li").removeClass("currentbtn");
+			    $(this).addClass("currentbtn");
+			    currentid2=$(this).attr("id");//返回当前元素的ID
+			    pictureid2 = currentid2.substring(currentid2.length - 1);
+			    $("#kuaixunimag li").hide();
+			    $("#kuaixunimag li").eq(pictureid2).show();
+			},function(){
+				currentid2=$(this).attr("id");//返回当前元素的ID
+			    pictureid2 = currentid2.substring(currentid2.length - 1);
+			    autoshow();
+			});
+			function autoshow()
+			{
+			    $(".kuaixunbtn li:last").removeClass("currentbtn");
+			    $(".kuaixunbtn li").eq(pictureid2).addClass("currentbtn");
+			    $(".kuaixunbtn li").eq(pictureid2-1).removeClass("currentbtn");
+			    $("#kuaixunimag li").eq(pictureid2).fadeIn("slow");
+			    $("#kuaixunimag li").eq(pictureid2-1).hide();
+			    pictureid2++;
+                pictureid2 = pictureid2 >= 4 ? 0 : pictureid2;
+			    DEMO2=setTimeout(autoshow,2000);
+			}
+			function stopshow()
+			{
+			    clearTimeout(DEMO2);
+			}
+		});
+		function blog_sty()
+		{
+			/************取当前class=weibotu1的div的ID************/
+			var currentid = $("div[class=weibotu1]").attr("id"); 
+            var currentindex = currentid.substring(currentid.length - 1); //取最后一个字符
+
+			if(zzjs_net.checked==true)
+			{
+				$(".weibotu1").eq(currentindex).css('border','#cccccc 1px solid'); 
+			}
+			if(zzjs_net.checked==false)
+			{
+				$(".weibotu1").eq(currentindex).css('border','#99CC66 3px solid'); 
+			}
+		}
+    </script>
 		<style type="text/css">
 			body{
 				text-align: center;
@@ -72,6 +170,145 @@
 				color: #FFFFFF;
 				text-decoration: none;
 			}
+			
+			.frame1css{
+				width: 999px;
+				height: 426px;
+			}
+			.frame2css{
+				width: 742px;
+				height: 426px;
+				position: relative;
+				float: left;
+				margin: 0px;
+				overflow: hidden;
+			}
+			.frame3css{
+				width: 250px;
+				height: 426px;
+				position: relative;
+				float: right;
+			}
+			.frame2_1css{
+				width: 742px;
+				height: 100%;
+				position: relative;
+				float: left;
+			}
+			.frame2_1css ul,.frame3css ul{
+				list-style-type: none;
+				list-style-image: none;
+				list-style: none outside none;
+				margin: 0;
+				padding: 0;
+			}
+			#ifocus_opdiv{
+				background-color: #000000;
+				bottom: 0;
+				height: 90px;
+				left: 0;
+				opacity: 0.4;
+				filter: alpha(opacity=40);
+				position: absolute;
+				width: 740px;
+			}
+			#ifocus_opdiv2{
+				background-image: url("img/sanjiao.gif");
+				background-repeat: no-repeat;
+				bottom: 0;
+				height: 115px;
+				top: 0;
+				left: 0;
+				position: absolute;
+                width: 116px;				
+			}
+			#ifocus_opdiv3{
+				color: #FFFFFF;
+				text-align: left;
+				bottom: 0;height: 90px;
+				left: 0;
+				position: absolute;
+				width: 722px;
+			}
+			#ifocus_opdiv3 ul{
+				list-style-type: none;
+				padding-left: 15px;
+			}
+			.ifocus_opdiv3_tex{
+				line-height: 18px;
+				color: #aaaaaa;
+			}
+			.frame3css li{
+				padding-bottom: 8px;
+				width: 239px;
+				height: 136px;
+				padding-left: 10px;
+			}
+			.contentcss{
+				width: 100%;
+				height: auto;
+				margin-top: 12px;
+			}
+			.leftcontent{
+				width: 651px;
+				height: auto;
+				position: relative;
+				float: left;
+			}
+			.rightcontent{
+				width: 330px;
+				height: auto;
+				position: relative;
+				float: right;
+			}
+			.contenttop{
+				width: 100%;
+				height: 210px;
+				border-bottom: #CCCCCC 1px solid;
+			}
+			.contenttop h2{
+				font-family:"黑体";
+				text-align: left;
+				color: #222222;
+				padding-top: 5px;
+				padding-left: 1px;
+				font-size: 23px;
+			}
+			.contenttop_h2{
+				height: 146px;
+				margin-top: 12px;
+			}
+			.contenttop_h2_rig{
+			border:#CCCCCC 1px solid;
+			width:216px;
+			height:141px;
+			padding-left:2px;
+			padding-top:4px;
+			position:relative;
+			float:left;
+		}
+		.contenttop_h2_rig a:link{
+			text-decoration: none;
+			color:#000000;
+		}
+		.contenttop_h2_lef a:link{
+			text-decoration: none;
+			color:#777777;
+		}
+		.contenttop_h2_lef{
+			width:375px;
+			position:relative;
+			float:right;
+			font-family:"宋体";
+			font-size:12px;
+			line-height: 23px;
+			padding-right:30px;
+			text-align:left;
+			color:#777777;
+		}
+			
+			
+			
 			.hezuo{
 				width: 999px;
 				border: #DDDDDD 1px solid;
@@ -212,7 +449,85 @@
 				
 			</tr>
 		</table>
-		<!--合作链接-->
+		<div id="frame1" class="frame1css">
+			<div id="frame2" class="frame2css">
+				<div id="frame2_1" class="frame2_1css">
+					<ul>
+						<li>
+							<a href="../" target="_blank">
+								<img src="img/1.gif" border="0" style="width:742px;height: 426px;">
+							</a>
+						</li>
+						<li style="display: none;">
+							<a href="../" target="_blank">
+								<img src="img/2.gif" border="0" style="width:742px;height: 426px;">
+							</a>
+						</li>
+						<li style="display:none;">
+							<a href="../" target="_blank">
+								<img src="img/3.gif" border="0" style="width: 742px;height: 426px;">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="ifocus_opdiv">
+				</div>
+				<div id="ifocus_opdiv2">
+				</div>
+				<div id="ifocus_opdiv3">
+					<ul>
+						<li>
+						<h2>高清组图:热热闹闹重阳节 幸福乡村爱老情</h2>
+						<p class="ifocus_opdiv3_tex">西安市长安区贾里村的乡亲们齐聚中心广场，通过歌曲、舞蹈、锣鼓、书画展等多彩的活动欢度重阳节。表演节目、书画作品大部分都是老人原创，内容页多取材于日常生活，充满了浓郁的社区气息。</p>
+					    </li>
+						<li>
+						 <h2>高清组图:绿色大树</h2>
+						 <p>西安市长安区贾里村的乡亲们齐聚中心广场，通过歌曲、舞蹈、锣鼓、书画展等多彩的活动欢度重阳节。表演节目、书画作品大部分都是老人原创，内容页多取材于日常生活，充满了浓郁的社区气息。</p>
+					</li>
+					<li>
+					    <h2>高清组图:美丽女孩</h2>
+						<p>西安市长安区贾里村的乡亲们齐聚中心广场，通过歌曲、舞蹈、锣鼓、书画展等多彩的活动欢度重阳节。表演节目、书画作品大部分都是老人原创，内容页多取材于日常生活，充满了浓郁的社区气息。</p>
+					</li>
+					</ul>
+			</div>
+			</div>
+			<div id="frame3" class="frame3css">
+				<ul>
+					<li id="p0">
+						<img src="img/1.gif" border="0">
+							
+					</li>
+					<li id="p1">
+						<img src="img/2.gif" border="0">
+					</li>
+					<li id="p2">
+						<img src="img/3.gif" border="0">
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="content" class="contentcss">
+			<div class="leftcontent">
+				<div class="contenttop" style="background-color: #eeeeee;">
+					<h2 style="margin-top: 1px;">陇上行：张艺谋一部《三枪拍案》炒火了张掖丹霞</h2>
+					<div class="contenttop_h2">
+						<div class="contenttop_h2_rig">
+							<img src="img/danxia.jpg" border="0"/>
+						</div>
+						<div class="contenttop_h2_lef"> 
+						<p>东西好不如卖得好。张掖丹霞国家地质公园的风景奇幻瑰丽，但在陕西导演张艺谋的贺岁大片《三枪拍案惊奇》之前，这里一天的游客顶多几百人，而今年黄金周，这里每天接待游客上万人。
+						<a href="../" target="_blank"><img style="position: relative;float: right;padding-right: 63px;" src="img/xiangxi.jpg" border="0"></a>
+						
+						</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
+	<!--合作链接-->
 	<div class="hezuo">
 		<div class="hezuo_title">   合作链接 <img src="img/lianjie.jpg" border="0px"></div>
 		<div class="hezuo_text"> 
